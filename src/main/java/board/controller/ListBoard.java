@@ -35,6 +35,7 @@ public class ListBoard extends HttpServlet {
 		Gson gson = new Gson();
 		PageVO pvo = gson.fromJson(reqData, PageVO.class);
 		
+		
 		IBoardService service = BoardServiceImpl.getInstance(BoardDaoImpl.getInstance());
 		
 		// 게시글 3개를 가져오기 위한 정보
