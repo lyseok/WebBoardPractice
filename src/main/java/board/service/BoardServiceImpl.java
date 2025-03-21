@@ -37,37 +37,37 @@ public class BoardServiceImpl implements IBoardService {
 	@Override
 	public int insertBoard(BoardVO vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.insertBoard(vo);
 	}
 
 	@Override
 	public int updateBoard(BoardVO vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.updateBoard(vo);
 	}
 
 	@Override
 	public int deleteBoard(int no) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.deleteBoard(no);
 	}
 
 	@Override
 	public int insertReply(ReplyVO vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.insertReply(vo);
 	}
 
 	@Override
 	public int updateReply(ReplyVO vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.updateReply(vo);
 	}
 
 	@Override
 	public int deleteReply(int no) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.deleteReply(no);
 	}
 
 	@Override

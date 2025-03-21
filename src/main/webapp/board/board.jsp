@@ -90,10 +90,20 @@ $(function() {
     boardListServer();
   });
 
-  // 글쓰기 버튼 이벤트
+  // 글쓰기 버튼 이벤트(모달창 띄우기)
   $('#write').on('click', function() {
-
+    $('#wModal').modal('show');
   });
+
+  // 글쓰기 모달창에서 데이터 입력 후 전송버튼 클릭 이벤트
+  $('#send').on('click', function() {
+    // 입력한 모든 값을 전부 가져오기
+    fdata = $('#wform').serializeJSON();
+    console.log(fdata);
+    boardWriteServer();
+  });
+
+
 	
 });
 </script>
@@ -147,6 +157,53 @@ $(function() {
 
 <!-- 페이지 정ㅂ 출력 -->
 <div id="pagelist"></div>
+
+<!-- The Modal -->
+<div class="modal" id="wModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">글쓰기</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form name="wfrom" id="wform">
+          
+          <input type="hidden" id="num" name="num">
+          <label>이름</label>
+          <input type="text" class="txt" id="writer" name="writer"> <br> 
+          
+          <label>제목</label>
+          <input type="text" class="txt" id="subject" name="subject"> <br> 
+          
+          <label>메일</label>
+          <input type="text" class="txt" id="mail" name="mail"> <br> 
+          
+          <label>비밀번호</label>
+          <input type="password" class="txt" id="password" name="password"> <br> 
+          
+          <label>내용</label>
+          <br>
+          <textarea rows="5" cols="40" class="txt" id="content" name="content"></textarea>
+          <br>
+          <br>
+          <input type="button" value="전송" id="send">
+        </form>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

@@ -1,4 +1,20 @@
 
+const boardWriteServer = () => {
+  $.ajax({
+    url:`${mypath}/insertBoard.do`,
+    data: JSON.stringify(fdata),
+    method: 'post',
+    contentType: 'application/json;charset=utf-8',
+    success: res => {
+      console.log(res.flag);
+    },
+    error: xhr => {
+      alert(xhr.status);
+    },
+    dataType: 'json'
+  });
+}
+
 const boardListServer = () => {
   vtype = $('#stype option:selected').val().trim();
 	vword = $('#sword').val().trim();
