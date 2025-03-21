@@ -23,6 +23,7 @@ public class InsertBoard extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String reqData = SendDataSrialize.chageData(request);
 		
+		System.out.println(reqData);
 		// 역직렬화
 		Gson gson = new Gson();
 		BoardVO vo  = gson.fromJson(reqData, BoardVO.class);

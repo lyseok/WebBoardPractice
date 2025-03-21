@@ -100,7 +100,13 @@ $(function() {
     // 입력한 모든 값을 전부 가져오기
     fdata = $('#wform').serializeJSON();
     console.log(fdata);
+    
     boardWriteServer();
+     // 모달창 값 지우기
+    $('#wModal .txt').val("");
+      
+      // 모달 닫기
+      $('#wModal').modal('hide');
   });
 
 
@@ -173,7 +179,6 @@ $(function() {
       <div class="modal-body">
         <form name="wfrom" id="wform">
           
-          <input type="hidden" id="num" name="num">
           <label>이름</label>
           <input type="text" class="txt" id="writer" name="writer"> <br> 
           

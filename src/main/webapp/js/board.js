@@ -7,6 +7,7 @@ const boardWriteServer = () => {
     contentType: 'application/json;charset=utf-8',
     success: res => {
       console.log(res.flag);
+      boardListServer();
     },
     error: xhr => {
       alert(xhr.status);
@@ -36,7 +37,8 @@ const boardListServer = () => {
         `;
 
       $.each(res.datas, function(i, v){
-
+        cont = v.content;
+        cont = cont.replaceAll(/\n/g, "<br>");
       code += `
         <div class="card">
           <div class="card-header">
@@ -60,7 +62,7 @@ const boardListServer = () => {
               </div>
 
               <p class="p3">
-                ${v.content}
+                ${cont}
               </p>
               <p class="p4">
                 <textarea cols="50" class="area"></textarea>
