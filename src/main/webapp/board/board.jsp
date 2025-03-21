@@ -64,19 +64,36 @@ currPage = 1;
 mypath = '<%=request.getContextPath() %>';
 
 $(function() {
-
+  boardListServer();
   
   // 이전 클릭 이벤트
-  
+  $(document).on('click', '#next', function(){
+    currPage = parseInt($('.pageno').last().text()) + 1;
+    boardListServer();
+  });
+
   // 다음 클릭 이벤트
-  
+  $(document).on('click', '#prev', function(){
+    currPage = parseInt($('.pageno').first().text()) - 1;
+    boardListServer();
+  });
+
   // search 이벤트
   $('#search').on('click', function() {
     currPage = 1;
     boardListServer();
   });
 
-  // 페이지 번호 클릭 이벤트트
+  // 페이지 번호 클릭 이벤트
+  $(document).on('click', '.pageno', function() {
+    currPage = parseInt($(this).text());
+    boardListServer();
+  });
+
+  // 글쓰기 버튼 이벤트
+  $('#write').on('click', function() {
+
+  });
 	
 });
 </script>
@@ -90,6 +107,7 @@ $(function() {
   
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container-fluid">
+    <input type="button" id="write" value="글쓰기">
     <a class="navbar-brand" href="javascript:void(0)">Logo</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
       <span class="navbar-toggler-icon"></span>
