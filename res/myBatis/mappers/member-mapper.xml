@@ -19,4 +19,11 @@
 		insert into mymember(MEM_ID, MEM_PASS, MEM_NAME, MEM_TEL, MEM_ADDR, MEM_ADD1, MEM_ADD2, MEM_MAIL, MEM_ZIP)
 		values (#{mem_id}, #{mem_pass}, #{mem_name}, #{mem_tel}, #{mem_addr}, #{mem_add1}, #{mem_add2}, #{mem_mail}, #{mem_zip})
 	</insert>
+	
+	<select id="loginProcess" parameterType="map" resultType="MemberVO">
+		select * 
+		  from mymember
+		 where mem_id = #{mem_id}
+		   and mem_pass = #{mem_pass}
+	</select>
 </mapper>

@@ -1,6 +1,7 @@
 package member.service;
 
 import java.util.List;
+import java.util.Map;
 
 import member.dao.IMemberDao;
 import member.vo.MemberVO;
@@ -38,6 +39,11 @@ public class MemberServiceImpl implements IMemberService {
 	@Override
 	public int insertMember(MemberVO vo) {
 		return dao.insertMember(vo);
+	}
+
+	@Override
+	public MemberVO loginProcess(Map<String, String> map) {
+		return dao.loginProcess(map);
 	}
 
 }

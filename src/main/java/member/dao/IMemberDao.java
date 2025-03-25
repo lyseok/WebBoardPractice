@@ -1,6 +1,7 @@
 package member.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import member.vo.MemberVO;
 import member.vo.ZipVO;
@@ -13,4 +14,6 @@ public interface IMemberDao {
 	public List<ZipVO> selectByDong(String dong);
 	
 	public int insertMember(MemberVO vo);
+	
+	public MemberVO loginProcess(Map<String, String> map);
 }

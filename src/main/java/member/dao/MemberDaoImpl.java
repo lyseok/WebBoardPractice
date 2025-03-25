@@ -1,6 +1,7 @@
 package member.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -86,6 +87,23 @@ public class MemberDaoImpl implements IMemberDao {
 		}
 		
 		return cnt;
+	}
+
+	@Override
+	public MemberVO loginProcess(Map<String, String> map) {
+		SqlSession session = null;
+		MemberVO vo = null;
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			vo = session.selectOne("member.loginProcess", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) session.close();
+		}
+		
+		return vo;
 	}
 
 }
