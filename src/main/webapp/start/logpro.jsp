@@ -11,45 +11,45 @@ mypath =  '<%= request.getContextPath()%>';
 $(function(){
 	/*  $(document).on('click', '#logout', () => { */
 	$('#logout').on('click', ()=>{		 
-	    $.ajax({
-		    url : `${mypath}/LogOutPro.do`,
-		    type : 'get',
-		    success : function(res){
-		      
-		      location.href="/boardlogpro/start/index.jsp";
-		    },
-		    error : function(xhr){
-		      alert("상태 : " + xhr.status);  //200 : json형태오류  404 : FileNotFound
-		    },
-		    dataType : 'html'
-	    });
+    $.ajax({
+      url : `${mypath}/logOutPro.do`,
+      type : 'get',
+      success : function(res){
+        
+        location.href= mypath +"/start/logpro.jsp";
+      },
+      error : function(xhr){
+        alert("상태 : " + xhr.status);  //200 : json형태오류  404 : FileNotFound
+      },
+      dataType : 'html'
+    });
     
- 	 });
+  });
   
 	/* $(document).on('click', '#login', () => {  */
 	$('#login').on('click', ()=>{	
 	    //입력한 id와 pass 값를 가져온다 
-	    idvalue = $('#id').val();
-	    passvalue = $('#pass').val();
-	    
-	    console.log(idvalue, passvalue);
+    idvalue = $('#id').val();
+    passvalue = $('#pass').val();
+    
+    console.log(idvalue, passvalue);
     
     
-	    $.ajax({
-	      url : `${mypath}/loginProcess.do`,
-	      type : 'post',
-	      contentType: 'application/json;charset=utf-8',
-	      data : JSON.stringify({"mem_id" : idvalue , "mem_pass"  : passvalue }),
-	      success : function(res){
-	        
-	        location.href= mypath + "/start/logpro.jsp";
-	      },
-	      error : function(xhr){
-	        alert("상태 : " + xhr.status);  //200 : json형태오류  404 : FileNotFound
-	      },
-	      dataType : 'html'
-     	});
-  	});
+    $.ajax({
+      url : `${mypath}/loginProcess.do`,
+      type : 'post',
+      contentType: 'application/json;charset=utf-8',
+      data : JSON.stringify({"mem_id" : idvalue , "mem_pass"  : passvalue }),
+      success : function(res){
+        
+        location.href= mypath + "/start/logpro.jsp";
+      },
+      error : function(xhr){
+        alert("상태 : " + xhr.status);  //200 : json형태오류  404 : FileNotFound
+      },
+      dataType : 'html'
+    });
+  });
 	
 });
 </script>
