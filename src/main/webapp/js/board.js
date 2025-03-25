@@ -130,9 +130,14 @@ const boardListServer = () => {
                         날짜<span class="da">${v.wdate}</span>
                         조회수<span class="hit">${v.hit}</span>
                     </p>
-                    <p class="p2">
-                        <input type="button" value="삭제" data-idx="${v.num}" name="delete" class="action">
-                        <input type="button" value="수정" data-idx="${v.num}" name="update" class="action">
+                    <p class="p2">`;
+                      // 로그인 했을 시에만 버튼이 보여지도록
+                      if(uvo != null && uvo.mem_name == v.writer){
+                      code += /*html*/ `
+                      <input type="button" value="삭제" data-idx="${v.num}" name="delete" class="action">
+                        <input type="button" value="수정" data-idx="${v.num}" name="update" class="action">`;
+                      }
+                    code += /*html*/`
                     </p>
                   </div>
                   <p class="p3">

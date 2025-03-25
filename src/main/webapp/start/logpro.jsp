@@ -16,7 +16,7 @@ $(function(){
       type : 'get',
       success : function(res){
         
-        location.href= mypath +"/start/logpro.jsp";
+        location.href= mypath +"/start/index.jsp";
       },
       error : function(xhr){
         alert("상태 : " + xhr.status);  //200 : json형태오류  404 : FileNotFound
@@ -42,7 +42,7 @@ $(function(){
       data : JSON.stringify({"mem_id" : idvalue , "mem_pass"  : passvalue }),
       success : function(res){
         
-        location.href= mypath + "/start/logpro.jsp";
+        location.href= mypath + "/start/index.jsp";
       },
       error : function(xhr){
         alert("상태 : " + xhr.status);  //200 : json형태오류  404 : FileNotFound

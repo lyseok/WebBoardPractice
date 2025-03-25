@@ -1,3 +1,5 @@
+<%@page import="com.google.gson.Gson"%>
+<%@page import="member.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -58,8 +60,25 @@ nav a{
 }
 
 </style>
+
 <script src="../js/board.js"></script>
+
+<%
+
+MemberVO vo = (MemberVO)session.getAttribute("loginok");
+
+// 자바 객체 vo를 JSON형태로 직렬화
+
+String vojson = null;
+Gson gson = new Gson();
+
+if(vo != null){
+	vojson = gson.toJson(vo);
+}
+
+%>
 <script>
+uvo = <%=vojson %>
 currPage = 1;
 mypath = '<%=request.getContextPath() %>';
 
@@ -93,7 +112,15 @@ $(function() {
 
   // 글쓰기 버튼 이벤트(모달창 띄우기)
   $('#write').on('click', function() {
-    $('#wModal').modal('show');
+	// 로그인 체크
+	if(uvo == null){
+		alert("로그인하세요");
+	} else {
+    	$('#wModal').modal('show');	
+    	$('#wModal #writer').val(uvo.mem_name);
+    	$('#wModal #writer').prop('readonly', true);
+    	
+	}
   });
 
   // 글쓰기 모달창에서 데이터 입력 후 전송버튼 클릭 이벤트
