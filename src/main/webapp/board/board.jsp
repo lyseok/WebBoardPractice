@@ -90,6 +90,7 @@ $(function() {
     boardListServer();
   });
 
+
   // 글쓰기 버튼 이벤트(모달창 띄우기)
   $('#write').on('click', function() {
     $('#wModal').modal('show');
@@ -125,16 +126,20 @@ $(function() {
       vcard = $(this).parents('.card');
       vwr = vcard.find('.wr').text();
       vmail = vcard.find('.em').text();
-      vcont = vcard.find('.p3').html();
-      vtit = vcard.find('.title').text();
+      vcont = vcard.find('.p3').text().trim();
+      vtit = vcard.find('.title').text().trim();
+
+      vcont = vcont.replaceAll(/<br>/g, "");
 
       $('#uModal #uwriter').val(vwr);
       $('#uModal #umail').val(vmail);
       $('#uModal #ucontent').val(vcont);
       $('#uModal #usubject').val(vtit);
+      $('#uModal #unum').val(vidx);
+
       // 모달창에 출력한다
     } else if(vname == 'delete') {
-      alert(vidx +'번 게시글을 삭제합니다');
+      boardDeleteServer();
     } else if(vname == 'reply') {
       alert(vidx +'번 게시글에 댓글을 씁니다');
     } else if(vname == 'list'){
@@ -142,7 +147,28 @@ $(function() {
     }
   })
 
+  // 수정모달창에서 전송 버튼 클릭이벤트
+  $('#usend').on('click', function() {
+    // 새롭게 수정된 항목들의 내용을 전부다 가져온다 
+    fdata = $('#uform').serializeJSON();
+    console.log(fdata);
+    
+    boardUpdateServer();
 
+    // ㅁ달창에서 새롭게 수정된 항목들의 내용을 다시 본문으로 수정한다
+
+     // 모달창 값 지우기
+    $('uModal .txt').val("");
+      
+      // 모달 닫기
+      $('#uModal').modal('hide');
+  });
+
+  $('#uModal').on('hide.bs.modal', function() {
+    $('#uModal *').each(function () {
+        $(this).blur();
+      });
+  });
 	
 });
 </script>

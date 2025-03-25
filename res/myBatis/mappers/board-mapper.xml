@@ -74,7 +74,7 @@
 	</update>
 	
 	<!-- 글 삭제 -->
-	<delete id="deleteBoare" parameterType="int">
+	<delete id="deleteBoard" parameterType="int">
 		delete from boardtab
          where num = #{num}
 	</delete>
