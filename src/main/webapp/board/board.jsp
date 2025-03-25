@@ -110,6 +110,39 @@ $(function() {
   });
 
 
+  // 수정 삭제 등록 제목 클릭 이벤트
+  $(document).on('click','.action', function() {
+    // name 과 data-idx속성값을 가져온다
+    vname = $(this).attr('name');
+    vidx = $(this).data('idx');
+
+    if(vname == 'update'){
+      // alert(vidx +'번 게시글을 수정합니다');
+      $('#uModal').modal('show');
+
+      // 수정할 본문의 내용이 모달창에 출력되어야 한다
+      // 본문의 내용을 가져온다
+      vcard = $(this).parents('.card');
+      vwr = vcard.find('.wr').text();
+      vmail = vcard.find('.em').text();
+      vcont = vcard.find('.p3').html();
+      vtit = vcard.find('.title').text();
+
+      $('#uModal #uwriter').val(vwr);
+      $('#uModal #umail').val(vmail);
+      $('#uModal #ucontent').val(vcont);
+      $('#uModal #usubject').val(vtit);
+      // 모달창에 출력한다
+    } else if(vname == 'delete') {
+      alert(vidx +'번 게시글을 삭제합니다');
+    } else if(vname == 'reply') {
+      alert(vidx +'번 게시글에 댓글을 씁니다');
+    } else if(vname == 'list'){
+      alert(vidx +'번 게시글에 댓글을 출력합니다');
+    }
+  })
+
+
 	
 });
 </script>
@@ -164,7 +197,7 @@ $(function() {
 <!-- 페이지 정ㅂ 출력 -->
 <div id="pagelist"></div>
 
-<!-- The Modal -->
+<!-- 글쓰기 모달 -->
 <div class="modal" id="wModal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -198,6 +231,54 @@ $(function() {
           <br>
           <input type="button" value="전송" id="send">
         </form>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 글수정정 모달 -->
+<div class="modal" id="uModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">글쓰기</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form name="ufrom" id="uform">
+          
+          <input type="hidden" id="unum" name="num">
+          <label>이름</label>
+          <input type="text" class="txt" id="uwriter" name="writer"> <br> 
+          
+          <label>제목</label>
+          <input type="text" class="txt" id="usubject" name="subject"> <br> 
+          
+          <label>메일</label>
+          <input type="text"  class="txt" id="umail" name="mail"> <br> 
+          
+          <label>비밀번호</label>
+          <input type="password"  class="txt" id="upassword"   name="password"> <br> 
+          
+          <label>내용</label>
+          <br>
+          <textarea rows="5" cols="40"  class="txt" id="ucontent"  name="content"></textarea>
+          <br>
+          <br>
+          <input type="button" value="전송" id="usend">
+        </form>
+
 
       </div>
 

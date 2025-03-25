@@ -31,7 +31,7 @@ const boardListServer = () => {
     method : 'post',
     contentType : 'application/json;charset=utf-8',
     success : res=>{
-      code = `
+      code = /* html */`
         <div class="container mt-3">
           <div id="accordion">
         `;
@@ -39,42 +39,42 @@ const boardListServer = () => {
       $.each(res.datas, function(i, v){
         cont = v.content;
         cont = cont.replaceAll(/\n/g, "<br>");
-      code += `
-        <div class="card">
-          <div class="card-header">
-            <a class="btn" data-bs-toggle="collapse" href="#collapse${v.num}">
-              ${v.subject}
-            </a>
-          </div>
-          <div id="collapse${v.num}" class="collapse" data-bs-parent="#accordion">
-            <div class="card-body">
-              <div class="pp12">
-                <p class="p1">
-                  작성자:<span class="wr">${v.writer}</span>&nbsp;&nbsp;&nbsp;
-                  이메일:<span class="em">${v.mail}</span>&nbsp;&nbsp;&nbsp;
-                  날짜:<span class="da">${v.wdate}</span>&nbsp;&nbsp;&nbsp;
-                  조회수:<span class="hit">${v.hit}</span>&nbsp;&nbsp;&nbsp;
-                </p>
-                <p class="p2">
-                  <input type="button" value="삭제" data-idx="${v.num}" name="del" class="action">
-                  <input type="button" value="수정" data-idx="${v.num}" name="update" class="action">
-                </p>
-              </div>
-
-              <p class="p3">
-                ${cont}
-              </p>
-              <p class="p4">
-                <textarea cols="50" class="area"></textarea>
-                <input type="button" value="등록" data-idx="${v.num}" name="reply" class="action">
-              </p>
-
+        code += /* html */`
+          <div class="card">
+            <div class="card-header">
+              <a class="btn action title" name="list" data-idx="${v.num} data-bs-toggle="collapse" href="#collapse${v.num}">
+                ${v.subject}
+              </a>
             </div>
-          </div>
-        </div>`;
+            <div id="collapse${v.num}" class="collapse show" data-bs-parent="#accordion">
+              <div class="card-body">
+                <div class="pp12">
+                  <p class="p1">
+                    작성자:<span class="wr">${v.writer}</span>&nbsp;&nbsp;&nbsp;
+                    이메일:<span class="em">${v.mail}</span>&nbsp;&nbsp;&nbsp;
+                    날짜:<span class="da">${v.wdate}</span>&nbsp;&nbsp;&nbsp;
+                    조회수:<span class="hit">${v.hit}</span>&nbsp;&nbsp;&nbsp;
+                  </p>
+                  <p class="p2">
+                    <input type="button" value="삭제" data-idx="${v.num}" name="del" class="action">
+                    <input type="button" value="수정" data-idx="${v.num}" name="update" class="action">
+                  </p>
+                </div>
+
+                <p class="p3">
+                  ${cont}
+                </p>
+                <p class="p4">
+                  <textarea cols="50" class="area"></textarea>
+                  <input type="button" value="등록" data-idx="${v.num}" name="reply" class="action">
+                </p>
+
+              </div>
+            </div>
+          </div>`;
 
         }); // 반복문
-        code += `
+        code +=/* html */ `
             </div>
           </div>
           `;

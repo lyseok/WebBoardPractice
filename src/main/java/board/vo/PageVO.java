@@ -9,7 +9,7 @@ public class PageVO {
 	private int startPage;
 	private int endPage;
 	private int totalPage;
-	private static int perList = 3; // 한 페이지에 출력되는 글 갯수
+	private static int perList = 5; // 한 페이지에 출력되는 글 갯수
 	private static int perPage = 2; // 한 화면에 출력되는 페이지 갯수
 	
 	public int getPage() {
