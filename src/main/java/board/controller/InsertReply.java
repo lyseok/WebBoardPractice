@@ -14,38 +14,30 @@ import com.google.gson.Gson;
 import board.dao.BoardDaoImpl;
 import board.service.BoardServiceImpl;
 import board.service.IBoardService;
-import board.vo.BoardVO;
+import board.vo.ReplyVO;
 
-@WebServlet("/updateBoard.do")
-public class UpdateBoard extends HttpServlet {
+/**
+ * Servlet implementation class InsertReply
+ */
+@WebServlet("/insertReply.do")
+public class InsertReply extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public UpdateBoard() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String reqData =  SendDataSrialize.chageData(request);
+		String reqData = SendDataSrialize.chageData(request);
 		
-		// Gson 
 		Gson gson = new Gson();
+		ReplyVO rvo = gson.fromJson(reqData, ReplyVO.class);
 		
-		BoardVO vo = gson.fromJson(reqData, BoardVO.class);
-		
-		vo.setWip(request.getRemoteAddr());
-		
-		//service 객체 얻기
 		IBoardService service = BoardServiceImpl.getInstance(BoardDaoImpl.getInstance());
 		
-		int res = service.updateBoard(vo);
+		int res = service.insertReply(rvo);
 		
 		request.setAttribute("result", res);
-		
-		request
-			.getRequestDispatcher("board/result.jsp")
-			.forward(request, response);
-
+		request.getRequestDispatcher("board/result.jsp").forward(request, response);
 	}
 
 }

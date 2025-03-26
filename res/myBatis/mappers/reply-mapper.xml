@@ -9,26 +9,26 @@
 <!-- 댓글 쓰기 -->
 <insert id="insertReply" parameterType="ReplyVO">
 	insert into replytab(renum, bonum, name, cont, redate)
-    values (REPLYTAB_RENUM_SEQ.nextval, ${bonum}, ${name}, ${cont}, sysdate)
+    values (REPLYTAB_RENUM_SEQ.nextval, #{bonum}, #{name}, #{cont}, sysdate)
 </insert>
 
 <!-- 댓글 수정 -->
 <update id="updateReply" parameterType="ReplyVO">
 		 update replytab 
-            set cont = ${cont}
-          where renum = ${renum}
+            set cont = #{cont}
+          where renum = #{renum}
 </update>
 
 <!-- 댓글 삭제 -->
 <delete id="deleteReply" parameterType="int">
 		delete from replytab
-         where renum = ${renum}
+         where renum = #{renum}
 </delete>
 
 <!-- 댓글 리스트 -->
 <select id="seleteReply" parameterType="int" resultType="ReplyVO">
 		 select * from replytab
-          where bonum = ${bonum}
+          where bonum = #{bonum}
 </select>
 	
 </mapper>

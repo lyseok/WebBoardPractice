@@ -1,3 +1,75 @@
+// 제목을 클릭하거나 또는 댓글 등록 버튼을 클릭할때
+const replydeleteServer = () => {
+  $.ajax({
+    url: '${mypath}/deleteReply.do',
+    data: {renum : vidx},
+    type: 'get',
+    success: res => {
+      replyListServer();
+    }
+  })
+}
+
+const replyListServer = () => {
+  $.ajax({
+    url:`${mypath}/listReply.do`,
+    data: {bonum : vidx},
+    type: 'get',
+    success: res => {
+      vcard = $(gtarget).parents('.card');
+      cbody = $(vcard).find('.card-body');
+      rcode = "";
+
+      $.each(res, function(i, v){
+        rcode += /* html */`
+          <div class="reply-body">
+            <div class="pp12">
+              <p class="p1">
+                  작성자<span class="wr">${v.name}</span>
+                  날짜<span class="da">${v.redate}</span>
+              </p>
+              <p class="p2">`;
+                // 로그인 했을 시에만 버튼이 보여지도록
+                if(uvo != null && uvo.mem_name == v.name){
+                rcode += /*html*/ `
+                  <input type="button" value="댓글삭제" data-idx="${v.renum}" name="r_delete" class="action">
+                  <input type="button" value="댓글수정" data-idx="${v.renum}" name="r_update" class="action">`;
+                }
+              rcode += /*html*/`
+              </p>
+            </div>
+            <p class="p3">
+              ${v.cont.replaceAll(/\n/g, '<br>')}
+            </p>
+          </div>`;
+      });
+
+      // 출력내용 만들기
+      $(cbody).find('.reply-body').remove();
+      $(cbody).append(rcode)
+    },
+    error: xhr => {
+      alert("상태" + xhr.status);
+    },
+    dataType: 'json'
+  });
+}
+
+const replyInsertServer = () => {
+  $.ajax({
+    url:`${mypath}/insertReply.do`,
+    data: JSON.stringify(reply),
+    type: 'post',
+    contentType: 'application/json;charset=utf-8',
+    success: res => {
+      replyListServer();
+    }, 
+    error: xhr => {
+      alert("상태" + xhr.status);
+    },
+    dataType: 'json'
+  });
+}
 
 const boardDeleteServer = () => {
   $.ajax({
@@ -147,8 +219,8 @@ const boardListServer = () => {
                     <textarea class="area" rows="4" cols="50"></textarea>
                     <input type="button" value="등록" data-idx="${v.num}" name="reply" class="action">
                   </p>
+                </div>
               </div>
-            </div>
             </div>`;
 
 

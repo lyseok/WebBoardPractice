@@ -58,6 +58,12 @@ nav a{
   margin-left: 10%;
 
 }
+.reply-body {
+  background:yellow;
+  border: 1px dotted pink;
+  margin: 1px;
+  padding: 2px;
+}
 
 </style>
 
@@ -81,6 +87,8 @@ if(vo != null){
 uvo = <%=vojson %>
 currPage = 1;
 mypath = '<%=request.getContextPath() %>';
+
+const reply = {}; // 빈객체, 동적으로 속성 또는 메소드를 추가할 수 있다.
 
 $(function() {
   boardListServer();
@@ -143,6 +151,7 @@ $(function() {
     // name 과 data-idx속성값을 가져온다
     vname = $(this).attr('name');
     vidx = $(this).data('idx');
+    gtarget = $(this); // this객체를 외부함수에서 사용할 수 있도록 전역 객체로 설정
 
     if(vname == 'update'){
       // alert(vidx +'번 게시글을 수정합니다');
@@ -168,9 +177,27 @@ $(function() {
     } else if(vname == 'delete') {
       boardDeleteServer();
     } else if(vname == 'reply') {
-      alert(vidx +'번 게시글에 댓글을 씁니다');
+      //alert(vidx + "번 게시글 댓글등록합니다");
+        
+      // 입력한 값 가져오기
+      cont = $(this).prev().val();
+      // 서버로 전송 - bonum, name, cont
+      reply.bonum = vidx;
+      reply.name = uvo.mem_name;
+      reply.cont = cont;
+      
+      replyInsertServer();
+
+      // 입력한 폼에서 입력한 댓글 지우기
+      $(this).prev().val("");
+
+
     } else if(vname == 'list'){
-      alert(vidx +'번 게시글에 댓글을 출력합니다');
+      replyListServer();
+    } else if(vname == 'r_delete'){
+      replyDeleteServer();
+    } else if(vname == 'r_update'){
+
     }
   })
 

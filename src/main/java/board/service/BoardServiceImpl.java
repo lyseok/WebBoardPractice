@@ -73,7 +73,7 @@ public class BoardServiceImpl implements IBoardService {
 	@Override
 	public List<ReplyVO> selectReply(int boNo) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.selectReply(boNo);
 	}
 
 	@Override
