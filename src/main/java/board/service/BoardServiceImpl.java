@@ -79,7 +79,7 @@ public class BoardServiceImpl implements IBoardService {
 	@Override
 	public int updateHitBoard(int boNo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.updateReply(null);
 	}
 
 	@Override

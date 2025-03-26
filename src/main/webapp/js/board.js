@@ -1,13 +1,20 @@
 // 제목을 클릭하거나 또는 댓글 등록 버튼을 클릭할때
-const replydeleteServer = () => {
+const replyDeleteServer = () => {
   $.ajax({
-    url: '${mypath}/deleteReply.do',
+    url: `${mypath}/deleteReply.do`,
     data: {renum : vidx},
     type: 'get',
     success: res => {
-      replyListServer();
-    }
-  })
+
+      // 성공하면 댓글 삭베 버튼을 기준으로reply-body를 찾아서 지운다
+      $(gtarget).find('.reply-body').remove();
+      
+    },
+    error: xhr => {
+
+    },
+    dataType: 'json'
+  });
 }
 
 const replyListServer = () => {
